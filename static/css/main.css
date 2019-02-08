@@ -24,11 +24,13 @@ body {
 }
 
 .pageTop {
-    margin: auto 0 auto 0;
+    height: 100%;
+    display: flex;
 }
 
 .title {
     font-size: 4em;
+    align-self: center;
 }
 
 .pageBody {
