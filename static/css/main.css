@@ -24,13 +24,16 @@ body {
 }
 
 .pageTop {
-    height: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
 
 .title {
     font-size: 4em;
     align-self: center;
+}
+
+.username {
 }
 
 .pageBody {
