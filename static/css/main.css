@@ -13,7 +13,7 @@ body {
     height: 100%;
     font-family: 'Karla', sans-serif;
     background: rgba(51, 51, 51, 1);
-    color: #ccc;
+    color: #eee;
     margin: 0 10px 0 10px;
 }
 
@@ -34,6 +34,27 @@ body {
 }
 
 .username {
+    align-self: center;
+    padding-left: 50%;
+    font-size: 2em;
+}
+
+#usernameBox {
+    background-color: transparent;
+    color: #eee;
+    border: none;
+    font-family: 'Karla', sans-serif;
+    font-size: .5em;
+}
+
+#usernameButton {
+    font-size: .5em;
+    background-color: transparent;
+    color: #eee;
+    border: none;
+    border-bottom: solid #eee 1.5px;
+    padding: 2.5px;
+    cursor: pointer;
 }
 
 .pageBody {
