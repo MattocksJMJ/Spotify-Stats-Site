@@ -24,15 +24,18 @@ body {
     height: 100%;
     display: grid;
     grid-auto-rows: 20% 70% 10%;
+    height: max-content;
 }
 
 .pageTop {
     display: grid;
     grid-template-columns: 50% 50%;
+    height: max-content;
+    padding: 2% 0 2% 0;
 }
 
 .title {
-    font-size: 4em;
+    font-size: 3vw;
     align-self: center;
 }
 
@@ -46,14 +49,16 @@ body {
     color: #eee;
     border: none;
     font-family: 'Karla', sans-serif;
-    font-size: 1.5em;
+    font-size: 1vw;
     cursor: default;
-    padding: 2.5px;
+    padding: 2px;
     text-align: end;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 #usernameButton {
-    font-size: 1em;
+    font-size: 1vw;
     background-color: transparent;
     color: #eee;
     border: none;
@@ -65,19 +70,21 @@ body {
 
 .pageBody {
     display: grid;
+    height: max-content;
 }
 
 .tableHeading {
     display: grid;
     grid-template-columns: 80% 20%;
-    font-size: 2em;
-    padding: 0 20% 0.5% 2px;
+    font-size: 1.5vw;
+    padding: 1% 20% 1% 2px;
+    align-content: flex-end;
 }
 
 .timePeriodDD {
     height: 100%;
     width: 100%;
-    font-size: 0.5em;
+    font-size: 1.2vw;
 }
 
 .timePeriodDDButton {
@@ -85,6 +92,7 @@ body {
     height: 100%;
     justify-content: end;
     align-content: flex-end;
+    cursor: pointer;
 }
 
 .timePeriodDDContent {
@@ -112,17 +120,27 @@ body {
 }
 
 .table {
-    font-size: 1em;
-    width: 80%;
-    padding: 0;
+    font-size: 1vw;
+    width: 80%; 
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-.table tr:nth-child(even) {
+.table tr:nth-child(odd) {
     background: rgba(23, 23, 23, 1);
+}
+
+td {
+    padding: 1px;
+}
+
+#table2 td:nth-child(even) {
+    width: 30%;
 }
 
 .pageBottom {
     display: grid;
     justify-self: center;
     align-self: center;
+    height: max-content;
 }
