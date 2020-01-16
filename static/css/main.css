@@ -15,6 +15,9 @@ body {
     background: rgba(51, 51, 51, 1);
     color: #eee;
     margin: 0 10px 0 10px;
+    padding-left:5%;
+    padding-right:5%;
+    font-size: 12pt;
 }
 
 .wrapper {
@@ -35,8 +38,7 @@ body {
 
 .username {
     align-self: center;
-    padding-left: 50%;
-    font-size: 2em;
+    justify-self: right;    
 }
 
 #usernameBox {
@@ -44,23 +46,83 @@ body {
     color: #eee;
     border: none;
     font-family: 'Karla', sans-serif;
-    font-size: .5em;
+    font-size: 1.5em;
+    cursor: default;
+    padding: 2.5px;
+    text-align: end;
 }
 
 #usernameButton {
-    font-size: .5em;
+    font-size: 1em;
     background-color: transparent;
     color: #eee;
     border: none;
-    border-bottom: solid #eee 1.5px;
     padding: 2.5px;
     cursor: pointer;
+    text-decoration: underline;
+    display: initial;
 }
 
 .pageBody {
     display: grid;
 }
 
+.tableHeading {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    font-size: 2em;
+    padding: 0 20% 0.5% 2px;
+}
+
+.timePeriodDD {
+    height: 100%;
+    width: 100%;
+    font-size: 0.5em;
+}
+
+.timePeriodDDButton {
+    display: grid;
+    height: 100%;
+    justify-content: end;
+    align-content: flex-end;
+}
+
+.timePeriodDDContent {
+    position: absolute;
+    display: none;
+    z-index: 1;
+    width: 14%;
+    padding: 5px 5px 5px 0;
+    text-align: end;
+    background-color: rgba(51, 51, 51, 1);
+    border: 5px solid rgba(51, 51, 51, 1);
+    box-shadow: 0 0 30px #222;
+}
+
+.timePeriodDD:hover .timePeriodDDContent {
+    display: grid;
+}
+
+.timePeriodDDContent p {
+    cursor: pointer;
+}
+
+.timePeriodDDContent p:hover {
+    font-weight: bold;
+}
+
+.table {
+    font-size: 1em;
+    width: 80%;
+    padding: 0;
+}
+
+.table tr:nth-child(even) {
+    background: rgba(23, 23, 23, 1);
+}
+
 .pageBottom {
     display: grid;
+    justify-self: center;
+    align-self: center;
 }
