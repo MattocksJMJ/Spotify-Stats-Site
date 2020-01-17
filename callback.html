@@ -7,6 +7,7 @@
 	<title>Stats for Spotify</title>
 	<link rel="icon" href="" type="image/x-icon"> <!-- TODO: Add icon -->
 	<link rel="stylesheet" href="static/css/main.css" type="text/css">
+	<link rel="stylesheet" href="static/css/dropdowns.css" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
     <script type="text/javascript" src="static/scripts/main.js"></script>
 	<script type="text/javascript" src="static/scripts/callbackScript.js"></script> 
@@ -23,13 +24,18 @@
 		</div>
 		<div class="pageBody">
 			<div class='tableHeading'>
-				Top Artists
-				<div class='timePeriodDD'>
-					<p class="timePeriodDDButton">Time Period ↓</p>
-					<div class="timePeriodDDContent" width='100%'>
-						<p id='artist1' onclick="artists1()">Short </p>
-						<p id='artists2'onclick='artists2()'>Medium</p>
-						<p id='artists3'onclick='artists3()'>Long</p>
+				<div>Top Artists</div>
+				<div class="buttonsWrapper">
+					<div class="createPlaylist">
+						<p class="playlistButton" onclick="createNewPlaylistA()">Create new playlist |</p>
+					</div>
+					<div class='timePeriodDD'>
+						<p class="timePeriodDDButton">Time Period ↓</p>
+						<div class="timePeriodDDContent" width='100%'>
+							<p onclick="artists1()">Short </p>
+							<p onclick="artists2()">Medium</p>
+							<p onclick="artists3()">Long</p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -66,7 +72,11 @@
 				</tr>	
 			</table>
 			<div class='tableHeading'>
-					Top Songs
+				<p>Top Songs</p>
+				<div class="buttonsWrapper">
+					<div class="createPlaylist">
+						<p class="playlistButton" onclick="createNewPlaylistS()">Create new playlist |</p>
+					</div>
 					<div class='timePeriodDD'>
 						<p class="timePeriodDDButton">Time Period ↓</p>
 						<div class="timePeriodDDContent" width='100%'>
@@ -76,6 +86,7 @@
 						</div>
 					</div>
 				</div>
+			</div>
 			<table id='table2' class='table'>
 				<tr>
 					<td></td>

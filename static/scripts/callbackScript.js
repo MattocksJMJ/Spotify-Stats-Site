@@ -4,6 +4,10 @@ window.onload = function() {
     loggedIn();
 }
 
+let songsArr = [];
+let re = /access_token=(.*)&token/g;
+let accessToken = (re.exec(window.location.hash.substring(1)))[1];
+
 function loggedIn() {
     setTimeout(4000);
    if (window.location == redirect_uri + '?error=access_denied') {
@@ -17,23 +21,23 @@ function loggedIn() {
 }
 
 function retrieveContent() {
-    let re = /access_token=(.*)&token/g;
-    var accessToken = (re.exec(window.location.hash.substring(1)))[1];
     const table1 = document.getElementById('table1');
     const table2 = document.getElementById('table2');
     let time_rangeA = sessionStorage.getItem('time_rangeA');
     let time_rangeS = sessionStorage.getItem('time_rangeS');
 
+    // Retrieve display name
     $.ajax({
         url: 'https://api.spotify.com/v1/me',
         headers: {
             'Authorization': 'Bearer ' + accessToken
         },
         success: function(response) {
-            // sort data into rows
             $('#usernameBox').val(response.display_name);
+            sessionStorage.setItem('display_name', response.display_name);
         }
     });
+    // Retrieve top artists
     $.ajax({
         url: 'https://api.spotify.com/v1/me/top/artists'
             + '?time_range=' + time_rangeA
@@ -49,6 +53,7 @@ function retrieveContent() {
             }
         }
     });
+    // Retrieve top songs
     $.ajax({
         url: 'https://api.spotify.com/v1/me/top/tracks'
             + '?time_range=' + time_rangeS
@@ -64,8 +69,48 @@ function retrieveContent() {
                     console.log();
                 }
             }
+            for (let i=0; i<10; i++) {
+                // addtoArr(response.items[i].uri, i);
+                songsArr[i] = response.items[i].uri;
+            }
+            sessionStorage.setItem('songsArr', JSON.stringify(songsArr));
         }
-    })
+    });
+}
+
+// Create new playlist with top songs
+function createNewPlaylistS() {
+    let playlistName = window.prompt('Please enter a name for the playlist');
+    let songsArr = JSON.parse(sessionStorage.getItem('songsArr'));
+    let display_name = sessionStorage.getItem('display_name');
+
+    $.ajax({
+        url: 'https://api.spotify.com/v1/users/'
+            + display_name + '/playlists',
+        method: 'POST',
+        headers:{
+            'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify({'name': playlistName}),
+        success: function(response) {
+            addSongs(response.id);
+        }
+    });
+
+    function addSongs(playlistID){
+        $.ajax({
+            url: 'https://api.spotify.com/v1/playlists/'
+                + playlistID + '/tracks?',
+            method: 'POST',
+            headers:{
+                'Authorization': 'Bearer ' + accessToken,
+                'Content-Type': ' application/json'
+            },
+            data: JSON.stringify({'uris': songsArr}),
+            success(response){}
+        });
+    }
 }
 
 // Dropdown changes
@@ -93,6 +138,8 @@ function songs3(){
     sessionStorage.setItem('time_rangeS', 'long_term');
     location.reload();
 }
+
+
 
 // When hover over artists image appears
 // " " " songs album cover appears

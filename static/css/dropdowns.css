@@ -1,0 +1,33 @@
+/* Time Period */
+
+.timePeriodDDButton {
+    display: grid;
+    height: 100%;
+    justify-content: end;
+    align-content: flex-end;
+    cursor: pointer;
+}
+
+.timePeriodDDContent {
+    position: absolute;
+    display: none;
+    z-index: 1;
+    width: 14%;
+    padding: 5px 5px 5px 0;
+    font-size: 1vw;
+    background-color: rgba(51, 51, 51, 1);
+    border: 5px solid rgba(51, 51, 51, 1);
+    box-shadow: 0 0 30px #222;
+}
+
+.timePeriodDD:hover .timePeriodDDContent {
+    display: grid;
+}
+
+.timePeriodDDContent p {
+    cursor: pointer;
+}
+
+.timePeriodDDContent p:hover {
+    font-weight: bold;
+}
