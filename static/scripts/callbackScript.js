@@ -5,6 +5,8 @@ window.onload = function() {
 }
 
 let songsArr = [];
+let artistsArr = [];
+let artistsTop = [];
 let re = /access_token=(.*)&token/g;
 let accessToken = (re.exec(window.location.hash.substring(1)))[1];
 
@@ -51,6 +53,11 @@ function retrieveContent() {
                     col.innerHTML = response.items[i].name;
                 }
             }
+            for (let i=0; i<10; i++) {
+                // addtoArr(response.items[i].uri, i);
+                artistsArr[i] = response.items[i].id;
+            }
+            sessionStorage.setItem('artistsArr', JSON.stringify(artistsArr));
         }
     });
     // Retrieve top songs
@@ -66,7 +73,6 @@ function retrieveContent() {
                 for (let j = 0, col; col = row.cells[j]; j++) {
                     if (j ==0) {col.innerHTML = response.items[i].name;}
                     else {col.innerHTML = response.items[i].artists[0].name;}
-                    console.log();
                 }
             }
             for (let i=0; i<10; i++) {
@@ -108,6 +114,53 @@ function createNewPlaylistS() {
                 'Content-Type': ' application/json'
             },
             data: JSON.stringify({'uris': songsArr}),
+            success(response){}
+        });
+    }
+}
+
+function createNewPlaylistA() {
+    let playlistName = window.prompt('Please enter a name for the playlist');
+    let artistsArr = JSON.parse(sessionStorage.getItem('artistsArr'));
+    let display_name = sessionStorage.getItem('display_name');
+
+    for (let i=0; i<10; i++) {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/artists/'
+                + artistsArr[i] + '/top-tracks?country=from_token',
+            headers:{
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success(response){
+                artistsTop[i] = response.tracks[0].uri;
+            }
+        });
+    }
+
+    $.ajax({
+        url: 'https://api.spotify.com/v1/users/'
+            + display_name + '/playlists',
+        method: 'POST',
+        headers:{
+            'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify({'name': playlistName}),
+        success: function(response) {
+            addSongs(response.id);
+        }
+    });
+
+    function addSongs(playlistID){
+        $.ajax({
+            url: 'https://api.spotify.com/v1/playlists/'
+                + playlistID + '/tracks?',
+            method: 'POST',
+            headers:{
+                'Authorization': 'Bearer ' + accessToken,
+                'Content-Type': ' application/json'
+            },
+            data: JSON.stringify({'uris': artistsTop}),
             success(response){}
         });
     }
