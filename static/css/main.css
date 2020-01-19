@@ -21,10 +21,8 @@ body {
 }
 
 .wrapper {
-    height: 100%;
-    display: grid;
-    grid-auto-rows: 20% 70% 10%;
     height: max-content;
+    display: grid;
 }
 
 .pageTop {
