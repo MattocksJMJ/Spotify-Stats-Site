@@ -28,7 +28,7 @@ function retrieveContent() {
     let time_rangeA = sessionStorage.getItem('time_rangeA');
     let time_rangeS = sessionStorage.getItem('time_rangeS');
 
-    // Retrieve display name
+    // Retrieve display name & id
     $.ajax({
         url: 'https://api.spotify.com/v1/me',
         headers: {
@@ -37,6 +37,7 @@ function retrieveContent() {
         success: function(response) {
             $('#usernameBox').val(response.display_name);
             sessionStorage.setItem('display_name', response.display_name);
+            sessionStorage.setItem('id', response.id);
         }
     });
     // Retrieve top artists
@@ -88,11 +89,11 @@ function retrieveContent() {
 function createNewPlaylistS() {
     let playlistName = window.prompt('Please enter a name for the playlist');
     let songsArr = JSON.parse(sessionStorage.getItem('songsArr'));
-    let display_name = sessionStorage.getItem('display_name');
+    let id = sessionStorage.getItem('id');
 
     $.ajax({
         url: 'https://api.spotify.com/v1/users/'
-            + display_name + '/playlists',
+            + id + '/playlists',
         method: 'POST',
         headers:{
             'Authorization': 'Bearer ' + accessToken,
@@ -122,7 +123,7 @@ function createNewPlaylistS() {
 function createNewPlaylistA() {
     let playlistName = window.prompt('Please enter a name for the playlist');
     let artistsArr = JSON.parse(sessionStorage.getItem('artistsArr'));
-    let display_name = sessionStorage.getItem('display_name');
+    let id = sessionStorage.getItem('id');
 
     for (let i=0; i<10; i++) {
         $.ajax({
@@ -139,7 +140,7 @@ function createNewPlaylistA() {
 
     $.ajax({
         url: 'https://api.spotify.com/v1/users/'
-            + display_name + '/playlists',
+            + id + '/playlists',
         method: 'POST',
         headers:{
             'Authorization': 'Bearer ' + accessToken,
