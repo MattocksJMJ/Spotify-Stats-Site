@@ -12,8 +12,8 @@ html {
 body {
     height: 100%;
     font-family: 'Karla', sans-serif;
-    background: rgba(51, 51, 51, 1);
-    color: #000000;
+    background: #000000;
+    color: #eee;
     margin: 0 10px 0 10px;
     padding-left:5%;
     padding-right:5%;
